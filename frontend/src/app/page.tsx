@@ -34,13 +34,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-// const fadeUp = {
-//   initial: { opacity: 0, y: 24 },
-//   whileInView: { opacity: 1, y: 0 },
-//   viewport: { once: true, amount: 0.3 },
-//   transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-// } as const;
-
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0 },
@@ -50,6 +43,7 @@ const fadeUpTransition: Transition = {
   duration: 0.6,
   ease: [0.16, 1, 0.3, 1],
 };
+
 const featureCards = [
   {
     icon: Activity,
@@ -154,8 +148,12 @@ export default function Home() {
               <Heart className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-sm font-semibold tracking-[0.24em] text-emerald-600 uppercase dark:text-emerald-400">Annadhan AI</p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">AI food redistribution platform</p>
+              <p className="text-sm font-semibold tracking-[0.24em] text-emerald-600 uppercase dark:text-emerald-400">
+                Annadhan AI
+              </p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                AI food redistribution platform
+              </p>
             </div>
           </Link>
 
@@ -195,11 +193,13 @@ export default function Home() {
 
           <div className="relative mx-auto grid max-w-7xl gap-16 px-4 py-20 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-28">
             <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={fadeUpTransition} className="flex flex-col justify-center">
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              transition={fadeUpTransition}
+              className="flex flex-col justify-center"
+            >
               <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-300">
                 <Zap className="h-4 w-4" />
                 AI-powered redistribution for food waste at scale
@@ -247,7 +247,9 @@ export default function Home() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ ...fadeUpTransition, duration: 0.65, delay: 0.1 }} className="relative">
+              transition={{ ...fadeUpTransition, duration: 0.65, delay: 0.1 }}
+              className="relative"
+            >
               <div className="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-emerald-500/20 via-cyan-400/10 to-transparent blur-3xl" />
               <Card className="relative overflow-hidden border-slate-200/80 bg-white/85 shadow-[0_30px_100px_-50px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/70">
                 <CardContent className="p-6 sm:p-8">
@@ -327,10 +329,10 @@ export default function Home() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{
-                    duration: 6,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: [0.42, 0, 0.58, 1],
-                  }}
+                  duration: 6,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: [0.42, 0, 0.58, 1],
+                }}
                 className="absolute -left-4 bottom-10 hidden w-64 rounded-3xl border border-slate-200 bg-white/90 p-4 shadow-2xl shadow-emerald-500/10 backdrop-blur-xl lg:block dark:border-slate-800 dark:bg-slate-900/85"
               >
                 <div className="flex items-center gap-3">
@@ -370,11 +372,13 @@ export default function Home() {
 
         <section id="features" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              transition={fadeUpTransition} className="max-w-2xl">
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={fadeUpTransition}
+            className="max-w-2xl"
+          >
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-600 dark:text-emerald-400">
               Features
             </p>
@@ -392,13 +396,13 @@ export default function Home() {
 
               return (
                 <motion.div
-                    key={feature.title}
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ ...fadeUpTransition, delay: index * 0.05 }}
-                  >
+                  key={feature.title}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ ...fadeUpTransition, delay: index * 0.05 }}
+                >
                   <Card className="group h-full border-slate-200 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/10 dark:border-slate-800 dark:bg-slate-900/80">
                     <CardHeader className="space-y-4">
                       <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500/15 to-cyan-500/10 text-emerald-600 ring-1 ring-inset ring-emerald-500/15 transition-transform duration-300 group-hover:scale-105 dark:text-emerald-400">
@@ -420,12 +424,14 @@ export default function Home() {
 
         <section id="how-it-works" className="border-y border-slate-200/70 bg-slate-50/70 py-20 dark:border-slate-800/70 dark:bg-slate-900/30 lg:py-28">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-           <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={fadeUpTransition} className="max-w-2xl">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              transition={fadeUpTransition}
+              className="max-w-2xl"
+            >
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-600 dark:text-emerald-400">
                 How It Works
               </p>
@@ -440,13 +446,13 @@ export default function Home() {
 
                 return (
                   <motion.div
-                      key={step.title}
-                      variants={fadeUp}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{ ...fadeUpTransition, delay: index * 0.06 }}
-                    >
+                    key={step.title}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ ...fadeUpTransition, delay: index * 0.06 }}
+                  >
                     <Card className="h-full border-slate-200 bg-white/95 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/80">
                       <CardHeader>
                         <div className="flex items-center justify-between">
@@ -469,12 +475,14 @@ export default function Home() {
         </section>
 
         <section id="impact" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-         <motion.div
+          <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            transition={fadeUpTransition} className="max-w-2xl">
+            transition={fadeUpTransition}
+            className="max-w-2xl"
+          >
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-600 dark:text-emerald-400">
               Impact
             </p>
@@ -489,13 +497,13 @@ export default function Home() {
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {impactStats.map((stat, index) => (
               <motion.div
-                  key={stat.label}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ ...fadeUpTransition, delay: index * 0.06 }}
-                >
+                key={stat.label}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ ...fadeUpTransition, delay: index * 0.06 }}
+              >
                 <Card className="h-full overflow-hidden border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/80">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between gap-4">
@@ -517,11 +525,13 @@ export default function Home() {
 
         <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
           <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              transition={fadeUpTransition} className="max-w-2xl">
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={fadeUpTransition}
+            className="max-w-2xl"
+          >
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-600 dark:text-emerald-400">
               Trust
             </p>
@@ -532,14 +542,14 @@ export default function Home() {
 
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {testimonials.map((testimonial, index) => (
-             <motion.div
-                  key={testimonial.name}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ ...fadeUpTransition, delay: index * 0.05 }}
-                >
+              <motion.div
+                key={testimonial.name}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ ...fadeUpTransition, delay: index * 0.05 }}
+              >
                 <Card className="h-full border-slate-200 bg-white/95 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/80">
                   <CardHeader className="space-y-4">
                     <div className="flex items-center gap-1 text-amber-500">
@@ -551,7 +561,9 @@ export default function Home() {
                       “{testimonial.quote}”
                     </CardDescription>
                     <div>
-                      <CardTitle className="text-base text-slate-950 dark:text-white">{testimonial.name}</CardTitle>
+                      <CardTitle className="text-base text-slate-950 dark:text-white">
+                        {testimonial.name}
+                      </CardTitle>
                       <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{testimonial.role}</p>
                     </div>
                   </CardHeader>
@@ -563,16 +575,18 @@ export default function Home() {
 
         <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
           <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              transition={fadeUpTransition}
-              className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-emerald-600 to-cyan-600 px-6 py-14 text-white shadow-2xl shadow-emerald-500/20 dark:border-slate-800"
-            >
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={fadeUpTransition}
+            className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-emerald-600 to-cyan-600 px-6 py-14 text-white shadow-2xl shadow-emerald-500/20 dark:border-slate-800"
+          >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_24%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.1),transparent_30%)]" />
             <div className="relative mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Ready to turn surplus food into measurable impact?</h2>
+              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                Ready to turn surplus food into measurable impact?
+              </h2>
               <p className="mt-4 text-lg leading-8 text-white/85">
                 Launch with a premium workflow for donors, receivers, and volunteers that feels polished on day one.
               </p>
@@ -604,7 +618,8 @@ export default function Home() {
               <span className="text-lg font-semibold text-slate-950 dark:text-white">Annadhan AI</span>
             </div>
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-              An AI-powered food redistribution platform built to reduce food waste and connect surplus meals with communities across India.</p>
+              An AI-powered food redistribution platform built to reduce food waste and connect surplus meals with communities across India.
+            </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
