@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  
+  /* Invert slate colors for automatic dark mode */
+  --color-white: #1e293b;
+  --color-slate-50: #0f172a;
+  --color-slate-100: #1e293b;
+  --color-slate-200: #334155;
+  --color-slate-300: #475569;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #cbd5e1;
+  --color-slate-600: #e2e8f0;
+  --color-slate-700: #f1f5f9;
+  --color-slate-800: #f8fafc;
+  --color-slate-900: #ffffff;
+  --color-slate-950: #ffffff;
+
+  /* Map gray to slate for dark mode since both are used */
+  --color-gray-50: #0f172a;
+  --color-gray-100: #1e293b;
+  --color-gray-200: #334155;
+  --color-gray-300: #475569;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #cbd5e1;
+  --color-gray-600: #e2e8f0;
+  --color-gray-700: #f1f5f9;
+  --color-gray-800: #f8fafc;
+  --color-gray-900: #ffffff;
+  --color-gray-950: #ffffff;
+
+  /* Keep brand colors somewhat consistent but visible */
+  --color-emerald-50: #064e3b;
+  --color-emerald-100: #065f46;
+  --color-emerald-200: #047857;
+  --color-emerald-600: #34d399; /* 400 */
+  --color-emerald-800: #a7f3d0;
+  
+  --color-blue-100: #1e3a8a;
+  --color-blue-600: #60a5fa; /* 400 */
+  --color-blue-800: #bfdbfe;
+  
+  --color-orange-100: #7c2d12;
+  --color-orange-600: #fb923c; /* 400 */
+  --color-orange-800: #fed7aa;
+
+  --color-green-100: #14532d;
+  --color-green-600: #4ade80; /* 400 */
+  
+  --color-red-50: #7f1d1d;
+  --color-red-100: #991b1b;
+  --color-red-200: #b91c1c;
+  --color-red-600: #f87171; /* 400 */
+  --color-red-800: #fecaca;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
