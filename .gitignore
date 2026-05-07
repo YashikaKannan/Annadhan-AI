@@ -1,0 +1,25 @@
+# Ignore backend/frontend ignored files at the root
+backend/venv/
+backend/__pycache__/
+frontend/node_modules/
+frontend/.next/
+.env
+
+
+# Python
+backend/venv/
+backend/__pycache__/
+*.pyc
+
+# Next.js / Node
+frontend/node_modules/
+frontend/.next/
+
+# Environment files
+.env
+frontend/.env.local
+backend/.env
+
+# OS / Editor
+.DS_Store
+.vscode/

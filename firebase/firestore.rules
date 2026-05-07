@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Base rule: Deny all by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // Users can read/write their own profiles. Admins can read all.
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || request.auth.token.role == 'admin');
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Listings: Donors can create. Receivers can read. Admins can read/write.
+    match /listings/{listingId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.token.role == 'donor';
+      allow update: if request.auth != null && (
+        request.auth.uid == resource.data.donorId || 
+        request.auth.token.role == 'admin' ||
+        (request.auth.token.role == 'receiver' && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'matchedReceiverId']))
+      );
+    }
+    
+    // Deliveries: Volunteers and involved parties can read/update.
+    match /deliveries/{deliveryId} {
+      allow read: if request.auth != null && (
+        request.auth.token.role == 'admin' ||
+        request.auth.uid == resource.data.volunteerId ||
+        request.auth.uid == resource.data.donorId ||
+        request.auth.uid == resource.data.receiverId
+      );
+      allow write: if request.auth != null && request.auth.token.role == 'volunteer';
+    }
+  }
+}
