@@ -4,9 +4,9 @@ import { Users as UsersIcon, ShieldCheck, ShieldAlert, Check, X } from "lucide-r
 
 export default function UsersPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-900 dark:text-slate-100">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">User Management</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">User Management</h2>
         <p className="text-muted-foreground">Manage and verify donors, receivers, and volunteers.</p>
       </div>
 
@@ -49,15 +49,15 @@ export default function UsersPage() {
         </Card>
       </div>
 
-      <Card>
+      <Card className="border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/70">
         <CardHeader>
-          <CardTitle>Recent Users & Verifications</CardTitle>
+          <CardTitle className="text-slate-900 dark:text-slate-100">Recent Users & Verifications</CardTitle>
           <CardDescription>Review pending verifications to ensure platform safety.</CardDescription>
         </CardHeader>
         <div className="p-0">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left text-slate-500 dark:text-slate-400">
-              <thead className="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-900/50 dark:text-slate-300 border-b dark:border-slate-800">
+            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
+              <thead className="border-b bg-slate-50 text-xs uppercase text-slate-700 dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-300">
                 <tr>
                   <th className="px-6 py-3">Name / Organization</th>
                   <th className="px-6 py-3">Role</th>
@@ -67,9 +67,9 @@ export default function UsersPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white dark:bg-transparent border-b dark:border-slate-800">
+                <tr className="border-b bg-white dark:border-slate-800 dark:bg-slate-950/40">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">City Fresh Bakery</td>
-                  <td className="px-6 py-4"><span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 text-xs font-medium px-2.5 py-0.5 rounded">Donor</span></td>
+                  <td className="px-6 py-4"><span className="rounded bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">Donor</span></td>
                   <td className="px-6 py-4">
                     <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
                       <ShieldCheck className="h-4 w-4" /> Verified
@@ -80,9 +80,9 @@ export default function UsersPage() {
                     <Button variant="outline" size="sm">View</Button>
                   </td>
                 </tr>
-                <tr className="bg-amber-50/50 dark:bg-amber-900/10 border-b dark:border-slate-800">
+                <tr className="border-b bg-amber-50/50 dark:border-slate-800 dark:bg-amber-900/10">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">Rahul Sharma</td>
-                  <td className="px-6 py-4"><span className="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400 text-xs font-medium px-2.5 py-0.5 rounded">Volunteer</span></td>
+                  <td className="px-6 py-4"><span className="rounded bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-800 dark:bg-purple-900/30 dark:text-purple-400">Volunteer</span></td>
                   <td className="px-6 py-4">
                     <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
                       <ShieldAlert className="h-4 w-4" /> Pending
@@ -94,9 +94,9 @@ export default function UsersPage() {
                     <Button variant="outline" size="sm" className="text-rose-600 border-rose-200 hover:bg-rose-50 dark:border-rose-900 dark:hover:bg-rose-900/20"><X className="h-4 w-4" /></Button>
                   </td>
                 </tr>
-                <tr className="bg-white dark:bg-transparent border-b dark:border-slate-800">
+                <tr className="border-b bg-white dark:border-slate-800 dark:bg-slate-950/40">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">Downtown Shelter</td>
-                  <td className="px-6 py-4"><span className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 text-xs font-medium px-2.5 py-0.5 rounded">Receiver</span></td>
+                  <td className="px-6 py-4"><span className="rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">Receiver</span></td>
                   <td className="px-6 py-4">
                     <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
                       <ShieldCheck className="h-4 w-4" /> Verified

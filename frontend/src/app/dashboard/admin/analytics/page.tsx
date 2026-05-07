@@ -3,9 +3,9 @@ import { Activity, Package, Truck, Heart } from "lucide-react";
 
 export default function AnalyticsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-900 dark:text-slate-100">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">Platform Analytics</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Platform Analytics</h2>
         <p className="text-muted-foreground">Key performance metrics and overall impact of Annadhan AI.</p>
       </div>
 
@@ -57,25 +57,25 @@ export default function AnalyticsPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card>
+        <Card className="border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/70">
           <CardHeader>
-            <CardTitle>Donations by Area</CardTitle>
+            <CardTitle className="text-slate-900 dark:text-slate-100">Donations by Area</CardTitle>
             <CardDescription>Geographic distribution of food pickup locations.</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[250px] w-full bg-slate-50 dark:bg-slate-900/50 rounded-md border border-slate-100 dark:border-slate-800 flex items-center justify-center">
-              <span className="text-slate-400 text-sm">Area-wise Chart (Placeholder)</span>
+            <div className="flex h-[250px] w-full items-center justify-center rounded-md border border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50">
+              <span className="text-sm text-slate-400 dark:text-slate-500">Area-wise Chart (Placeholder)</span>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/70">
           <CardHeader>
-            <CardTitle>Platform Growth</CardTitle>
+            <CardTitle className="text-slate-900 dark:text-slate-100">Platform Growth</CardTitle>
             <CardDescription>Monthly active users and new registrations.</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[250px] w-full bg-slate-50 dark:bg-slate-900/50 rounded-md border border-slate-100 dark:border-slate-800 flex items-center justify-center">
-              <span className="text-slate-400 text-sm">Growth Chart (Placeholder)</span>
+            <div className="flex h-[250px] w-full items-center justify-center rounded-md border border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50">
+              <span className="text-sm text-slate-400 dark:text-slate-500">Growth Chart (Placeholder)</span>
             </div>
           </CardContent>
         </Card>

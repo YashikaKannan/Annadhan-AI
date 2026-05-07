@@ -10,11 +10,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --muted-foreground: 100 116 139;
 }
 
 .dark {
   --background: #0f172a;
   --foreground: #f8fafc;
+  --muted-foreground: 148 163 184;
 }
 
 * {
@@ -55,4 +57,10 @@ button {
 
 .dark ::-webkit-scrollbar-thumb {
   background: #475569;
+}
+
+@layer utilities {
+  .text-muted-foreground {
+    color: rgb(var(--muted-foreground));
+  }
 }

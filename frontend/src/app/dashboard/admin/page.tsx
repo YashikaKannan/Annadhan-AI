@@ -16,9 +16,9 @@ const data = [
 
 export default function AdminDashboard() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-900 dark:text-slate-100">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">Admin Dashboard</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Admin Dashboard</h2>
         <p className="text-muted-foreground">Platform overview and user management.</p>
       </div>
 
@@ -66,9 +66,9 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
+        <Card className="col-span-4 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/70">
           <CardHeader>
-            <CardTitle>Impact Analytics</CardTitle>
+            <CardTitle className="text-slate-900 dark:text-slate-100">Impact Analytics</CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
             <div className="h-[300px] w-full">
@@ -85,9 +85,9 @@ export default function AdminDashboard() {
             </div>
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="col-span-3 border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/70">
           <CardHeader>
-            <CardTitle>Recent Verifications Needed</CardTitle>
+            <CardTitle className="text-slate-900 dark:text-slate-100">Recent Verifications Needed</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
                   <p className="text-sm text-muted-foreground">Donor Registration</p>
                 </div>
                 <div className="ml-auto font-medium">
-                  <span className="bg-orange-100 text-orange-800 text-xs px-2.5 py-0.5 rounded">Pending</span>
+                  <span className="rounded bg-orange-100 px-2.5 py-0.5 text-xs text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">Pending</span>
                 </div>
               </div>
               <div className="flex items-center">
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
                   <p className="text-sm text-muted-foreground">Receiver Registration</p>
                 </div>
                 <div className="ml-auto font-medium">
-                  <span className="bg-orange-100 text-orange-800 text-xs px-2.5 py-0.5 rounded">Pending</span>
+                  <span className="rounded bg-orange-100 px-2.5 py-0.5 text-xs text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">Pending</span>
                 </div>
               </div>
             </div>

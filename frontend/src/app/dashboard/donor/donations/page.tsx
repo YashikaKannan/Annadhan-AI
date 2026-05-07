@@ -3,9 +3,9 @@ import { Package, Clock, CheckCircle } from "lucide-react";
 
 export default function DonationsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-900 dark:text-slate-100">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">My Donations</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">My Donations</h2>
         <p className="text-muted-foreground">Manage and track your food donations.</p>
       </div>
 
@@ -48,8 +48,8 @@ export default function DonationsPage() {
         </CardHeader>
         <div className="p-0">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left text-slate-500 dark:text-slate-400">
-              <thead className="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-900/50 dark:text-slate-300 border-b dark:border-slate-800">
+            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
+              <thead className="border-b bg-slate-50 text-xs uppercase text-slate-700 dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-300">
                 <tr>
                   <th className="px-6 py-3">Food Item</th>
                   <th className="px-6 py-3">Quantity</th>
@@ -60,29 +60,29 @@ export default function DonationsPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white dark:bg-transparent border-b dark:border-slate-800">
+                <tr className="border-b bg-white dark:border-slate-800 dark:bg-slate-950/40">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">Mixed Veg Curry & Rice</td>
                   <td className="px-6 py-4">40 servings</td>
                   <td className="px-6 py-4">Hope Orphanage</td>
                   <td className="px-6 py-4">Today, 2:30 PM</td>
                   <td className="px-6 py-4">Today, 6:00 PM</td>
-                  <td className="px-6 py-4"><span className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400 text-xs font-medium px-2.5 py-0.5 rounded">Pending Pickup</span></td>
+                  <td className="px-6 py-4"><span className="rounded bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">Pending Pickup</span></td>
                 </tr>
-                <tr className="bg-white dark:bg-transparent border-b dark:border-slate-800">
+                <tr className="border-b bg-white dark:border-slate-800 dark:bg-slate-950/40">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">Bread & Sandwiches</td>
                   <td className="px-6 py-4">20 servings</td>
                   <td className="px-6 py-4">Community Kitchen</td>
                   <td className="px-6 py-4">Yesterday, 5:00 PM</td>
                   <td className="px-6 py-4">Yesterday, 9:00 PM</td>
-                  <td className="px-6 py-4"><span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 text-xs font-medium px-2.5 py-0.5 rounded">Delivered</span></td>
+                  <td className="px-6 py-4"><span className="rounded bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">Delivered</span></td>
                 </tr>
-                <tr className="bg-white dark:bg-transparent border-b dark:border-slate-800">
+                <tr className="bg-white dark:border-slate-800 dark:bg-slate-950/40">
                   <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-100">Leftover Buffet Food</td>
                   <td className="px-6 py-4">100 servings</td>
                   <td className="px-6 py-4">City Shelter</td>
                   <td className="px-6 py-4">May 5, 11:00 PM</td>
                   <td className="px-6 py-4">May 6, 2:00 AM</td>
-                  <td className="px-6 py-4"><span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 text-xs font-medium px-2.5 py-0.5 rounded">Delivered</span></td>
+                  <td className="px-6 py-4"><span className="rounded bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">Delivered</span></td>
                 </tr>
               </tbody>
             </table>

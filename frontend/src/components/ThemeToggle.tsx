@@ -38,7 +38,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="flex h-9 w-9 items-center justify-center rounded-full p-2 transition-colors hover:bg-slate-100 text-slate-500"
+        className="flex h-9 w-9 items-center justify-center rounded-full p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
         aria-label="Toggle theme"
       />
     );
@@ -47,7 +47,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="flex h-9 w-9 items-center justify-center rounded-full p-2 transition-colors hover:bg-slate-100 text-slate-500 dark:hover:bg-slate-800 dark:text-slate-400"
+      className="flex h-9 w-9 items-center justify-center rounded-full p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
       aria-label="Toggle theme"
     >
       {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
