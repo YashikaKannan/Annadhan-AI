@@ -1,20 +1,85 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Activity, Package, Truck, Heart } from "lucide-react";
 
 export default function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">Analytics</h2>
-        <p className="text-muted-foreground">Placeholder page for Analytics.</p>
+        <h2 className="text-2xl font-bold tracking-tight">Platform Analytics</h2>
+        <p className="text-muted-foreground">Key performance metrics and overall impact of Annadhan AI.</p>
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Analytics Details</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-slate-500 dark:text-slate-400">This section is under construction.</p>
-        </CardContent>
-      </Card>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Donations</CardTitle>
+            <Package className="h-4 w-4 text-emerald-600 dark:text-emerald-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">14,250</div>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center mt-1">
+              <Activity className="h-3 w-3 mr-1" /> +12% this month
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Meals Saved</CardTitle>
+            <Heart className="h-4 w-4 text-rose-600 dark:text-rose-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">85,400</div>
+            <p className="text-xs text-muted-foreground mt-1">Total meals distributed</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Waste Reduced</CardTitle>
+            <Activity className="h-4 w-4 text-blue-600 dark:text-blue-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">21,350 kg</div>
+            <p className="text-xs text-muted-foreground mt-1">Equivalent to 42t CO2e</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Delivery Success Rate</CardTitle>
+            <Truck className="h-4 w-4 text-purple-600 dark:text-purple-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">96.8%</div>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center mt-1">
+              <Activity className="h-3 w-3 mr-1" /> +2.1% this month
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Donations by Area</CardTitle>
+            <CardDescription>Geographic distribution of food pickup locations.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[250px] w-full bg-slate-50 dark:bg-slate-900/50 rounded-md border border-slate-100 dark:border-slate-800 flex items-center justify-center">
+              <span className="text-slate-400 text-sm">Area-wise Chart (Placeholder)</span>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Platform Growth</CardTitle>
+            <CardDescription>Monthly active users and new registrations.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[250px] w-full bg-slate-50 dark:bg-slate-900/50 rounded-md border border-slate-100 dark:border-slate-800 flex items-center justify-center">
+              <span className="text-slate-400 text-sm">Growth Chart (Placeholder)</span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

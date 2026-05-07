@@ -9,36 +9,45 @@ export function ThemeToggle() {
 
   useEffect(() => {
     setMounted(true);
-    if (document.documentElement.classList.contains("dark")) {
+
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add("dark");
       setTheme("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      setTheme("light");
     }
   }, []);
 
   const toggleTheme = () => {
-    if (theme === "light") {
+    const nextTheme = theme === "light" ? "dark" : "light";
+
+    setTheme(nextTheme);
+    localStorage.setItem("theme", nextTheme);
+
+    if (nextTheme === "dark") {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setTheme("dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setTheme("light");
     }
   };
 
   if (!mounted) {
     return (
-      <button 
-        className="text-slate-500 p-2 rounded-full hover:bg-slate-100 transition-colors flex items-center justify-center w-9 h-9"
+      <button
+        className="flex h-9 w-9 items-center justify-center rounded-full p-2 transition-colors hover:bg-slate-100 text-slate-500"
         aria-label="Toggle theme"
       />
     );
   }
 
   return (
-    <button 
-      onClick={toggleTheme} 
-      className="text-slate-500 p-2 rounded-full hover:bg-slate-100 transition-colors flex items-center justify-center"
+    <button
+      onClick={toggleTheme}
+      className="flex h-9 w-9 items-center justify-center rounded-full p-2 transition-colors hover:bg-slate-100 text-slate-500 dark:hover:bg-slate-800 dark:text-slate-400"
       aria-label="Toggle theme"
     >
       {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}

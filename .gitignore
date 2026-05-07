@@ -1,12 +1,4 @@
-# Ignore backend/frontend ignored files at the root
-backend/venv/
-backend/__pycache__/
-frontend/node_modules/
-frontend/.next/
-.env
-
-
-# Python
+# Python Backend
 backend/venv/
 backend/__pycache__/
 *.pyc
@@ -15,11 +7,16 @@ backend/__pycache__/
 frontend/node_modules/
 frontend/.next/
 
-# Environment files
+# Environment Variables
 .env
 frontend/.env.local
 backend/.env
 
+# Secrets
+backend/credentials/
+backend/credentials/*.json
+
 # OS / Editor
 .DS_Store
 .vscode/
+backend/credentials/*.json

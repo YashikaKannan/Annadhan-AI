@@ -33,7 +33,7 @@ export default function DashboardLayout({
       setTheme("light");
     }
   };
-  
+
   // Quick mock to determine role from path for the sidebar
   const role = pathname.split('/')[2] || 'donor';
 
@@ -63,12 +63,12 @@ export default function DashboardLayout({
   const links = navItems[role as keyof typeof navItems] || navItems.donor;
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      <aside className="hidden md:flex w-64 flex-col bg-white border-r">
-        <div className="h-16 flex items-center px-6 border-b">
+    <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+      <aside className="hidden md:flex fixed left-0 top-0 h-screen w-64 flex-col bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="h-16 flex items-center px-6 border-b border-slate-200 dark:border-slate-800">
           <Link href="/" className="flex items-center gap-2 text-emerald-600">
             <Heart className="h-6 w-6" />
-            <span className="font-bold text-lg text-slate-900">Annadhan AI</span>
+            <span className="font-bold text-lg text-slate-900 dark:text-slate-100">Annadhan AI</span>
           </Link>
         </div>
         <nav className="flex-1 px-4 py-6 space-y-2">
@@ -79,8 +79,10 @@ export default function DashboardLayout({
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2 text-slate-500 transition-all hover:text-slate-900 hover:bg-slate-100",
-                  pathname === link.href ? "bg-emerald-50 text-emerald-600 font-medium" : ""
+                  "flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 transition-all hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800",
+                  pathname === link.href
+                    ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 font-medium"
+                    : ""
                 )}
               >
                 <Icon className="h-5 w-5" />
@@ -89,10 +91,10 @@ export default function DashboardLayout({
             );
           })}
         </nav>
-        <div className="p-4 border-t space-y-2">
-          <button 
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
+          <button
             onClick={toggleTheme}
-            className="w-full flex items-center gap-3 rounded-lg px-3 py-2 text-slate-500 transition-all hover:text-slate-900 hover:bg-slate-100 min-h-[40px]"
+            className="w-full flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 transition-all hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 min-h-[40px]"
           >
             {mounted && (
               <>
@@ -101,15 +103,15 @@ export default function DashboardLayout({
               </>
             )}
           </button>
-          <Link href="/login" className="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-500 transition-all hover:text-red-600 hover:bg-red-50">
+          <Link href="/login" className="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 transition-all hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
             <LogOut className="h-5 w-5" />
             Logout
           </Link>
         </div>
       </aside>
-      
-      <main className="flex-1 flex flex-col">
-        <header className="h-16 flex items-center justify-between border-b bg-white px-6 md:hidden">
+
+      <main className="flex-1 flex flex-col md:ml-64 h-screen overflow-y-auto">
+        <header className="h-16 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-6 md:hidden">
           <div className="flex items-center gap-4">
             <Heart className="h-6 w-6 text-emerald-600" />
             <span className="font-bold">Annadhan AI</span>
