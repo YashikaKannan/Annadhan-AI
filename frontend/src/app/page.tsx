@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   Activity,
   ArrowRight,
@@ -307,7 +307,11 @@ export default function Home() {
 
               <motion.div
                 animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                transition={{
+                    duration: 6,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: [0.42, 0, 0.58, 1],
+                  }}
                 className="absolute -left-4 bottom-10 hidden w-64 rounded-3xl border border-slate-200 bg-white/90 p-4 shadow-2xl shadow-emerald-500/10 backdrop-blur-xl lg:block dark:border-slate-800 dark:bg-slate-900/85"
               >
                 <div className="flex items-center gap-3">
@@ -323,7 +327,12 @@ export default function Home() {
 
               <motion.div
                 animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.8 }}
+                transition={{
+                  duration: 7,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: [0.42, 0, 0.58, 1],
+                  delay: 0.8,
+                }}
                 className="absolute -right-3 top-8 hidden w-56 rounded-3xl border border-slate-200 bg-white/90 p-4 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl lg:block dark:border-slate-800 dark:bg-slate-900/85"
               >
                 <div className="flex items-center gap-3">
