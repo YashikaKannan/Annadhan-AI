@@ -13,7 +13,10 @@ app = FastAPI(
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # For dev, should be restricted in production
+    allow_origins=[
+        "http://localhost:3000",
+        "https://annadhan-ai.vercel.app",
+    ], # For dev, should be restricted in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

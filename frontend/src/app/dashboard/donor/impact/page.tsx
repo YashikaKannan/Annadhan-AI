@@ -1,186 +1,347 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Leaf, Truck, Users, TrendingUp } from "lucide-react";
+"use client";
 
-const monthlyData = [
-  { month: "Jan", meals: 60 },
-  { month: "Feb", meals: 85 },
-  { month: "Mar", meals: 110 },
-  { month: "Apr", meals: 95 },
-  { month: "May", meals: 140 },
-  { month: "Jun", meals: 125 },
-];
+import { useEffect, useMemo, useState } from "react";
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import {
+  Heart,
+  Leaf,
+  Truck,
+  Users,
+  TrendingUp,
+  Loader2,
+  RefreshCw,
+} from "lucide-react";
+
+import { fetchJson, API_URL } from "@/lib/api";
+import { AnalyticsSummary, Listing } from "@/lib/types";
 
 export default function ImpactPage() {
-  const maxMeals = Math.max(...monthlyData.map((item) => item.meals));
+  const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
+  const [listings, setListings] = useState<Listing[]>([]);
+
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const [error, setError] = useState("");
+
+  const loadData = async () => {
+    try {
+      setError("");
+
+      const [summaryData, listingsData] = await Promise.all([
+        fetchJson<AnalyticsSummary>(
+          `${API_URL}/api/v1/analytics/summary`
+        ),
+        fetchJson<Listing[]>(
+          `${API_URL}/api/v1/listings`
+        ),
+      ]);
+
+      setSummary(summaryData || null);
+      setListings(Array.isArray(listingsData) ? listingsData : []);
+    } catch (err: any) {
+      console.error(err);
+      setError(err?.message || "Failed to load impact data");
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const totalMealsSaved = useMemo(() => {
+    return (
+      summary?.mealsSaved ??
+      summary?.totalFoodSaved ??
+      listings.reduce((sum, item) => {
+        return sum + (item.quantity || 0);
+      }, 0)
+    );
+  }, [summary, listings]);
+
+  const activeDonors = useMemo(() => {
+    return (
+      summary?.activeDonors ??
+      1
+    );
+  }, [summary]);
+
+  const deliveriesCompleted = useMemo(() => {
+    return (
+      summary?.deliveriesCompleted ??
+      listings.filter((item) => {
+        const status = (item.status || "").toLowerCase();
+
+        return (
+          status.includes("delivered") ||
+          status.includes("completed")
+        );
+      }).length
+    );
+  }, [summary, listings]);
+
+  const wasteReduced = useMemo(() => {
+    return (
+      summary?.wasteReducedKg ??
+      summary?.wasteReduced ??
+      Math.round(totalMealsSaved * 0.25)
+    );
+  }, [summary, totalMealsSaved]);
+
+  const estimatedPeopleFed = useMemo(() => {
+    return Math.round(totalMealsSaved * 0.9);
+  }, [totalMealsSaved]);
+
+  const carbonReduction = useMemo(() => {
+    return Math.round(wasteReduced * 2.5);
+  }, [wasteReduced]);
 
   return (
-    <div className="space-y-6 bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-          Your Impact
-        </h2>
-        <p className="text-slate-500 dark:text-slate-400">
-          See how your contributions are making a difference.
-        </p>
+    <div className="space-y-6 text-slate-900 dark:text-slate-100">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Impact Dashboard
+          </h1>
+
+          <p className="text-muted-foreground">
+            Track your contribution towards reducing food waste.
+          </p>
+        </div>
+
+        <button
+          onClick={() => {
+            setRefreshing(true);
+            loadData();
+          }}
+          className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-slate-800/70"
+        >
+          {refreshing ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Refreshing
+            </>
+          ) : (
+            <>
+              <RefreshCw className="h-4 w-4" />
+              Refresh
+            </>
+          )}
+        </button>
       </div>
+
+      {error ? (
+        <div className="rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+          {error}
+        </div>
+      ) : null}
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700 dark:text-slate-300">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
               Meals Saved
             </CardTitle>
-            <Heart className="h-4 w-4 text-rose-600 dark:text-rose-500" />
+
+            <Heart className="h-4 w-4 text-emerald-500" />
           </CardHeader>
+
           <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-              1,250
+            <div className="text-2xl font-bold">
+              {loading ? "..." : Number(totalMealsSaved).toLocaleString()}
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">+150 this month</p>
+
+            <p className="text-xs text-muted-foreground">
+              Total meals redistributed
+            </p>
           </CardContent>
         </Card>
 
-        <Card className="border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700 dark:text-slate-300">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
+              Deliveries Completed
+            </CardTitle>
+
+            <Truck className="h-4 w-4 text-blue-500" />
+          </CardHeader>
+
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {loading ? "..." : Number(deliveriesCompleted).toLocaleString()}
+            </div>
+
+            <p className="text-xs text-muted-foreground">
+              Successful food deliveries
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
+              Active Donors
+            </CardTitle>
+
+            <Users className="h-4 w-4 text-amber-500" />
+          </CardHeader>
+
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {loading ? "..." : Number(activeDonors).toLocaleString()}
+            </div>
+
+            <p className="text-xs text-muted-foreground">
+              Donors contributing now
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
               Waste Reduced
             </CardTitle>
-            <Leaf className="h-4 w-4 text-emerald-600 dark:text-emerald-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-              320 kg
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Equivalent to 400kg CO2
-            </p>
-          </CardContent>
-        </Card>
 
-        <Card className="border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Deliveries
-            </CardTitle>
-            <Truck className="h-4 w-4 text-blue-600 dark:text-blue-500" />
+            <Leaf className="h-4 w-4 text-green-500" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-              43
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Successful transfers
-            </p>
-          </CardContent>
-        </Card>
 
-        <Card className="border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              NGOs Helped
-            </CardTitle>
-            <Users className="h-4 w-4 text-purple-600 dark:text-purple-500" />
-          </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-              8
+            <div className="text-2xl font-bold">
+              {loading ? "..." : `${Number(wasteReduced).toLocaleString()} kg`}
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Across 3 cities
+
+            <p className="text-xs text-muted-foreground">
+              Food waste prevented
             </p>
           </CardContent>
         </Card>
       </div>
 
-      <Card className="border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-        <CardHeader className="flex items-center justify-between">
-          <div>
-            <CardTitle className="text-slate-900 dark:text-slate-100">
-              Impact Insights
-            </CardTitle>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Your monthly donations and community impact.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
-            <TrendingUp className="h-4 w-4" />
-            <span className="text-sm font-medium">Growing steadily</span>
-          </div>
-        </CardHeader>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Community Impact</CardTitle>
+          </CardHeader>
 
-        <CardContent className="space-y-6">
-          <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Thank you for being a consistent donor! Your regular contributions on
-            weekends have helped feed over 500 individuals this quarter alone.
-            By diverting surplus food from landfills, you have also significantly
-            contributed to reducing greenhouse gas emissions.
-          </p>
+          <CardContent className="space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <p className="text-sm font-medium">
+                  Estimated People Fed
+                </p>
 
-          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-950/50">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                  Monthly Meals Saved
-                </h3>
-                <span className="text-xs text-slate-500 dark:text-slate-400">
-                  Last 6 months
+                <p className="text-xs text-muted-foreground">
+                  Approximate beneficiaries reached
+                </p>
+              </div>
+
+              <div className="text-2xl font-bold text-emerald-500">
+                {estimatedPeopleFed.toLocaleString()}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <p className="text-sm font-medium">
+                  Carbon Reduction
+                </p>
+
+                <p className="text-xs text-muted-foreground">
+                  Estimated CO₂ emissions prevented
+                </p>
+              </div>
+
+              <div className="text-2xl font-bold text-green-500">
+                {carbonReduction.toLocaleString()} kg
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium">
+                  Donation Growth
+                </p>
+
+                <p className="text-xs text-muted-foreground">
+                  Increase in donation activity
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 text-emerald-500">
+                <TrendingUp className="h-5 w-5" />
+                <span className="text-2xl font-bold">
+                  +24%
                 </span>
               </div>
+            </div>
+          </CardContent>
+        </Card>
 
-              <div className="flex h-56 items-end gap-4">
-                {monthlyData.map((item) => {
-                  const heightPercent = (item.meals / maxMeals) * 100;
-                  return (
-                    <div key={item.month} className="flex flex-1 flex-col items-center gap-2">
-                      <div className="flex h-44 w-full items-end justify-center">
-                        <div
-                          className="w-full max-w-12 rounded-t-lg bg-emerald-500/90 dark:bg-emerald-400"
-                          style={{ height: `${heightPercent}%` }}
-                        />
-                      </div>
-                      <div className="text-xs font-medium text-slate-600 dark:text-slate-400">
-                        {item.month}
-                      </div>
-                      <div className="text-xs text-slate-500 dark:text-slate-500">
-                        {item.meals}
-                      </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Impact Activity</CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            {loading ? (
+              <div className="flex items-center justify-center py-10">
+                <Loader2 className="h-5 w-5 animate-spin" />
+              </div>
+            ) : listings.length === 0 ? (
+              <div className="py-10 text-center text-sm text-muted-foreground">
+                No impact activity found.
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {listings.slice(0, 5).map((listing, index) => (
+                  <div
+                    key={
+                      listing.id ||
+                      `${listing.foodType}-${index}`
+                    }
+                    className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 p-4"
+                  >
+                    <div>
+                      <p className="font-medium">
+                        {listing.foodType || "Food Donation"}
+                      </p>
+
+                      <p className="text-sm text-muted-foreground">
+                        {listing.quantity || 0} servings donated
+                      </p>
                     </div>
-                  );
-                })}
+
+                    <div className="text-right">
+                      <p className="font-medium text-emerald-500">
+                        {listing.status || "Pending"}
+                      </p>
+
+                      <p className="text-xs text-muted-foreground">
+                        {listing.createdAt
+                          ? new Date(
+                              listing.createdAt
+                            ).toLocaleDateString()
+                          : "Recently"}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-
-            <div className="space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-950/50">
-              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                Impact Highlights
-              </h3>
-
-              <div className="space-y-3">
-                <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/70">
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Top contribution day</p>
-                  <p className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">
-                    Saturday
-                  </p>
-                </div>
-
-                <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/70">
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Most helped NGO</p>
-                  <p className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">
-                    Hope Orphanage
-                  </p>
-                </div>
-
-                <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/70">
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Estimated carbon saved</p>
-                  <p className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">
-                    400 kg CO2
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
